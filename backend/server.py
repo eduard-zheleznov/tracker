@@ -227,7 +227,7 @@ async def create_assessment(data: AssessmentCreate, authorization: str = Header(
     return AssessmentResponse(**assessment_doc)
 
 @api_router.get("/assessments", response_model=List[AssessmentResponse])
-async def get_assessments(authorization: str = ""):
+async def get_assessments(authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     assessments = await db.assessments.find(
