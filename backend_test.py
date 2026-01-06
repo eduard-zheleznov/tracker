@@ -314,23 +314,24 @@ def main():
         tester.test_happiness_score()
         tester.test_unauthorized_access()
         
-        # Print final results
-        print("\n" + "=" * 50)
-        print(f"📊 FINAL RESULTS")
-        print(f"Tests run: {tester.tests_run}")
-        print(f"Tests passed: {tester.tests_passed}")
-        success_rate = (tester.tests_passed/tester.tests_run)*100 if tester.tests_run > 0 else 0
-        print(f"Success rate: {success_rate:.1f}%")
-        
-        if tester.tests_passed == tester.tests_run:
-            print("🎉 All tests passed!")
-            return 0
-        else:
-            print(f"❌ {tester.tests_run - tester.tests_passed} tests failed")
-            return 1
-            
     except Exception as e:
         print(f"💥 Test suite failed with error: {str(e)}")
+        import traceback
+        traceback.print_exc()
+    
+    # Print final results
+    print("\n" + "=" * 50)
+    print(f"📊 FINAL RESULTS")
+    print(f"Tests run: {tester.tests_run}")
+    print(f"Tests passed: {tester.tests_passed}")
+    success_rate = (tester.tests_passed/tester.tests_run)*100 if tester.tests_run > 0 else 0
+    print(f"Success rate: {success_rate:.1f}%")
+    
+    if tester.tests_passed == tester.tests_run:
+        print("🎉 All tests passed!")
+        return 0
+    else:
+        print(f"❌ {tester.tests_run - tester.tests_passed} tests failed")
         return 1
 
 if __name__ == "__main__":
