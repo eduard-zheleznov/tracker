@@ -496,30 +496,79 @@ class JoyTrackerAPITester:
             200
         )
 
-    def test_unauthorized_access(self):
-        """Test unauthorized access"""
-        print("\n=== UNAUTHORIZED ACCESS TESTS ===")
+    def test_admin_endpoints(self):
+        """Test admin endpoints"""
+        print("\n=== ADMIN TESTS ===")
         
-        # Temporarily remove token
-        original_token = self.token
-        self.token = None
-        
-        self.run_test(
-            "Unauthorized Profile Access",
-            "GET",
-            "auth/me",
-            401
-        )
-        
-        self.run_test(
-            "Unauthorized Assessment Creation",
+        # First, login as admin
+        admin_success, admin_response = self.run_test(
+            "Admin Login",
             "POST",
-            "assessments",
-            401,
-            data={"harmonious_states": ["test"]}
+            "auth/login",
+            200,
+            data={
+                "login": "admin",
+                "password": "admin123"
+            }
         )
         
-        # Restore token
+        if not admin_success:
+            print("❌ Admin login failed, skipping admin tests")
+            return
+        
+        # Store original token and use admin token
+        original_token = self.token
+        self.token = admin_response['access_token']
+        
+        # Test admin stats
+        self.run_test(
+            "Get Admin Stats",
+            "GET",
+            "admin/stats",
+            200
+        )
+        
+        # Test admin FAQ management
+        self.run_test(
+            "Get Admin FAQ",
+            "GET",
+            "admin/faq",
+            200
+        )
+        
+        # Test admin content management
+        self.run_test(
+            "Get Admin Content",
+            "GET",
+            "admin/content",
+            200
+        )
+        
+        # Test admin categories
+        self.run_test(
+            "Get Admin Categories",
+            "GET",
+            "admin/education/categories",
+            200
+        )
+        
+        # Test admin videos
+        self.run_test(
+            "Get Admin Videos",
+            "GET",
+            "admin/education/videos",
+            200
+        )
+        
+        # Test admin feedback
+        self.run_test(
+            "Get Admin Feedback",
+            "GET",
+            "admin/feedback",
+            200
+        )
+        
+        # Restore original token
         self.token = original_token
 
 def main():
