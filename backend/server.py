@@ -208,7 +208,7 @@ async def get_me(authorization: str = Header(None)):
 # ==================== Assessment Endpoints ====================
 
 @api_router.post("/assessments", response_model=AssessmentResponse)
-async def create_assessment(data: AssessmentCreate, authorization: str = ""):
+async def create_assessment(data: AssessmentCreate, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     assessment_id = str(uuid.uuid4())
