@@ -83,7 +83,7 @@ class JoyTrackerAPITester:
             "auth/register",
             200,
             data={
-                "login": self.test_user_login,
+                "login": self.test_login,
                 "password": self.test_password,
                 "password_hint": self.test_hint
             }
@@ -102,7 +102,7 @@ class JoyTrackerAPITester:
             "auth/register",
             400,
             data={
-                "login": self.test_user_login,
+                "login": self.test_login,
                 "password": self.test_password,
                 "password_hint": self.test_hint
             }
@@ -119,7 +119,7 @@ class JoyTrackerAPITester:
             "auth/login",
             200,
             data={
-                "login": self.test_user_login,
+                "login": self.test_login,
                 "password": self.test_password
             }
         )
@@ -135,7 +135,7 @@ class JoyTrackerAPITester:
             "auth/login",
             401,
             data={
-                "login": self.test_user_login,
+                "login": self.test_login,
                 "password": "wrong_password"
             }
         )
@@ -164,7 +164,7 @@ class JoyTrackerAPITester:
             "auth/reset-password",
             200,
             data={
-                "login": self.test_user_login,
+                "login": self.test_login,
                 "new_password": new_password
             }
         )
@@ -177,7 +177,7 @@ class JoyTrackerAPITester:
                 "auth/login",
                 200,
                 data={
-                    "login": self.test_user_login,
+                    "login": self.test_login,
                     "password": new_password
                 }
             )
