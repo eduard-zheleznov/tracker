@@ -153,7 +153,7 @@ class JoyTrackerAPITester:
             "POST",
             "auth/password-hint",
             200,
-            data={"login": self.test_user_login}
+            data={"login": self.test_login}
         )
         
         if success and response.get('hint') == self.test_hint:
