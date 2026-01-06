@@ -197,7 +197,7 @@ async def reset_password(data: PasswordResetRequest):
     return {"message": "Пароль успешно изменён"}
 
 @api_router.get("/auth/me", response_model=UserResponse)
-async def get_me(authorization: str = ""):
+async def get_me(authorization: str = Header(None)):
     user = await get_current_user(authorization)
     return UserResponse(
         id=user["id"],
