@@ -496,6 +496,32 @@ class JoyTrackerAPITester:
             200
         )
 
+    def test_unauthorized_access(self):
+        """Test unauthorized access"""
+        print("\n=== UNAUTHORIZED ACCESS TESTS ===")
+        
+        # Temporarily remove token
+        original_token = self.token
+        self.token = None
+        
+        self.run_test(
+            "Unauthorized Profile Access",
+            "GET",
+            "auth/me",
+            401
+        )
+        
+        self.run_test(
+            "Unauthorized Assessment Creation",
+            "POST",
+            "assessments",
+            401,
+            data={"harmonious_states": ["test"]}
+        )
+        
+        # Restore token
+        self.token = original_token
+
     def test_admin_endpoints(self):
         """Test admin endpoints"""
         print("\n=== ADMIN TESTS ===")
