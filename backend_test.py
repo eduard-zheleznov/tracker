@@ -274,6 +274,228 @@ class JoyTrackerAPITester:
             }
         )
 
+    def test_analysis_endpoints(self):
+        """Test analysis endpoints"""
+        print("\n=== ANALYSIS TESTS ===")
+        
+        # Test state repetition
+        self.run_test(
+            "State Repetition Analysis",
+            "POST",
+            "analysis/state-repetition",
+            200,
+            data={"period_type": "quarter"}
+        )
+        
+        # Test habit trend
+        self.run_test(
+            "Habit Trend Analysis",
+            "POST",
+            "analysis/habit-trend",
+            200,
+            data={"period_type": "quarter"}
+        )
+        
+        # Test happiness trend
+        self.run_test(
+            "Happiness Trend Analysis",
+            "POST",
+            "analysis/happiness-trend",
+            200,
+            data={"period_type": "quarter"}
+        )
+
+    def test_strategy_endpoints(self):
+        """Test strategy endpoints"""
+        print("\n=== STRATEGY TESTS ===")
+        
+        # Test decisions
+        self.run_test(
+            "Get Decisions",
+            "POST",
+            "strategy/decisions",
+            200,
+            data={"period_type": "quarter"}
+        )
+        
+        # Test decisions with filter
+        self.run_test(
+            "Get Decisions with Filter",
+            "POST",
+            "strategy/decisions?filter_type=simple_task",
+            200,
+            data={"period_type": "quarter"}
+        )
+        
+        # Test reflections
+        self.run_test(
+            "Get Reflections",
+            "POST",
+            "strategy/reflections",
+            200,
+            data={"period_type": "quarter"}
+        )
+
+    def test_profile_endpoints(self):
+        """Test profile endpoints"""
+        print("\n=== PROFILE TESTS ===")
+        
+        # Test get profile
+        self.run_test(
+            "Get Profile",
+            "GET",
+            "profile",
+            200
+        )
+        
+        # Test update profile
+        profile_data = {
+            "name": "Test User",
+            "age": 25,
+            "field_of_activity": "Software Development",
+            "about_me": "Testing the app",
+            "income_level": "Middle",
+            "hobbies": "Programming",
+            "country": "Russia",
+            "phone": "+7123456789",
+            "email": "test@example.com",
+            "telegram": "@testuser",
+            "social_vk": "testuser",
+            "social_instagram": "testuser"
+        }
+        
+        self.run_test(
+            "Update Profile",
+            "PUT",
+            "profile",
+            200,
+            data=profile_data
+        )
+
+    def test_reminders_endpoints(self):
+        """Test reminders endpoints"""
+        print("\n=== REMINDERS TESTS ===")
+        
+        # Test get reminders
+        self.run_test(
+            "Get Reminders",
+            "GET",
+            "reminders",
+            200
+        )
+        
+        # Test update reminders
+        reminder_data = {
+            "assessment_enabled": True,
+            "assessment_time": "22:00",
+            "analysis_enabled": True,
+            "analysis_time": "10:00",
+            "strategy_enabled": False,
+            "strategy_time": "10:00",
+            "education_enabled": True,
+            "education_time": "10:00"
+        }
+        
+        self.run_test(
+            "Update Reminders",
+            "PUT",
+            "reminders",
+            200,
+            data=reminder_data
+        )
+
+    def test_faq_endpoints(self):
+        """Test FAQ endpoints"""
+        print("\n=== FAQ TESTS ===")
+        
+        # Test get FAQ
+        self.run_test(
+            "Get FAQ",
+            "GET",
+            "faq",
+            200
+        )
+        
+        # Test submit question
+        question_data = {
+            "question": "How does the happiness calculation work?",
+            "topic": "Общие"
+        }
+        
+        self.run_test(
+            "Submit Question",
+            "POST",
+            "questions",
+            200,
+            data=question_data
+        )
+
+    def test_feedback_endpoint(self):
+        """Test feedback endpoint"""
+        print("\n=== FEEDBACK TESTS ===")
+        
+        feedback_data = {
+            "rating": 5,
+            "suggestion": "Great app! Maybe add more state categories."
+        }
+        
+        self.run_test(
+            "Submit Feedback",
+            "POST",
+            "feedback",
+            200,
+            data=feedback_data
+        )
+
+    def test_education_endpoints(self):
+        """Test education endpoints"""
+        print("\n=== EDUCATION TESTS ===")
+        
+        # Test get categories
+        success, response = self.run_test(
+            "Get Education Categories",
+            "GET",
+            "education/categories",
+            200
+        )
+        
+        if success and response.get('categories'):
+            # Test get videos for first category
+            first_category = response['categories'][0]
+            category_id = first_category['id']
+            
+            self.run_test(
+                f"Get Category Videos - {first_category['name']}",
+                "GET",
+                f"education/categories/{category_id}/videos",
+                200
+            )
+
+    def test_content_endpoints(self):
+        """Test content endpoints"""
+        print("\n=== CONTENT TESTS ===")
+        
+        content_keys = ['psychologist', 'tariff', 'author']
+        
+        for key in content_keys:
+            self.run_test(
+                f"Get Content - {key}",
+                "GET",
+                f"content/{key}",
+                200
+            )
+
+    def test_dictionary_endpoint(self):
+        """Test dictionary endpoint"""
+        print("\n=== DICTIONARY TESTS ===")
+        
+        self.run_test(
+            "Get Dictionary",
+            "GET",
+            "dictionary",
+            200
+        )
+
     def test_unauthorized_access(self):
         """Test unauthorized access"""
         print("\n=== UNAUTHORIZED ACCESS TESTS ===")
