@@ -42,7 +42,11 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       const data = await authAPI.login(loginName, password);
       localStorage.setItem('token', data.access_token);
-      setUser(data.user);
+      // Include is_admin from response
+      setUser({
+        ...data.user,
+        is_admin: data.user.is_admin || false
+      });
       return { success: true };
     } catch (err) {
       const message = err.response?.data?.detail || 'Ошибка входа';
@@ -56,7 +60,11 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       const data = await authAPI.register(loginName, password, passwordHint);
       localStorage.setItem('token', data.access_token);
-      setUser(data.user);
+      // Include is_admin from response (always false for new users)
+      setUser({
+        ...data.user,
+        is_admin: data.user.is_admin || false
+      });
       return { success: true };
     } catch (err) {
       const message = err.response?.data?.detail || 'Ошибка регистрации';
