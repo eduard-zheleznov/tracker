@@ -29,7 +29,10 @@ class JoyTrackerAPITester:
         print(f"\n🔍 Testing {name}...")
         print(f"   URL: {url}")
         if data:
-            print(f"   Data: {json.dumps(data, indent=2)}")
+            try:
+                print(f"   Data: {json.dumps(data, indent=2)}")
+            except (TypeError, ValueError):
+                print(f"   Data: {str(data)}")
         
         try:
             if method == 'GET':
