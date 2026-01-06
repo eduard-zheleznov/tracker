@@ -6,7 +6,16 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 import AssessmentPage from "./pages/AssessmentPage";
-import { EducationPage, AnalysisPage, StrategyPage } from "./pages/PlaceholderPages";
+import AnalysisPage from "./pages/AnalysisPage";
+import StrategyPage from "./pages/StrategyPage";
+import EducationPage from "./pages/EducationPage";
+import ProfilePage from "./pages/ProfilePage";
+import FAQPage from "./pages/FAQPage";
+import RemindersPage from "./pages/RemindersPage";
+import DictionaryPage from "./pages/DictionaryPage";
+import FeedbackPage from "./pages/FeedbackPage";
+import { PsychologistPage, TariffPage, AuthorPage } from "./pages/ContentPages";
+import AdminPage from "./pages/AdminPage";
 import { Toaster } from "./components/ui/sonner";
 
 // Redirect authenticated users away from auth page
@@ -76,6 +85,80 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <StrategyPage />
+          </ProtectedRoute>
+        } 
+      />
+      {/* Menu pages */}
+      <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/faq" 
+        element={
+          <ProtectedRoute>
+            <FAQPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/reminders" 
+        element={
+          <ProtectedRoute>
+            <RemindersPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/dictionary" 
+        element={
+          <ProtectedRoute>
+            <DictionaryPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/feedback" 
+        element={
+          <ProtectedRoute>
+            <FeedbackPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/psychologist" 
+        element={
+          <ProtectedRoute>
+            <PsychologistPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/tariff" 
+        element={
+          <ProtectedRoute>
+            <TariffPage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/author" 
+        element={
+          <ProtectedRoute>
+            <AuthorPage />
+          </ProtectedRoute>
+        } 
+      />
+      {/* Admin */}
+      <Route 
+        path="/admin" 
+        element={
+          <ProtectedRoute>
+            <AdminPage />
           </ProtectedRoute>
         } 
       />

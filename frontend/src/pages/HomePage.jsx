@@ -5,9 +5,10 @@ import { happinessAPI } from '../lib/api';
 import HappinessSpeedometer from '../components/HappinessSpeedometer';
 import PeriodSelector from '../components/PeriodSelector';
 import BottomNavigation from '../components/BottomNavigation';
+import SideMenu from '../components/SideMenu';
 
 const HomePage = () => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [happinessData, setHappinessData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedPeriod, setSelectedPeriod] = useState('quarter');
@@ -50,10 +51,13 @@ const HomePage = () => {
 
   return (
     <div className="dark-purple main-app-bg" data-testid="home-page">
+      {/* Side Menu */}
+      <SideMenu isOpen={showMenu} onClose={() => setShowMenu(false)} />
+
       {/* Header */}
       <header className="flex items-center justify-between px-4 py-4 safe-area-pt">
         <button 
-          onClick={() => setShowMenu(!showMenu)}
+          onClick={() => setShowMenu(true)}
           className="p-2 text-white/70 hover:text-white transition-colors"
           data-testid="menu-btn"
         >
@@ -67,23 +71,6 @@ const HomePage = () => {
           <Lightbulb size={24} />
         </button>
       </header>
-
-      {/* Menu Dropdown */}
-      {showMenu && (
-        <div className="absolute top-16 left-4 z-50 glass rounded-xl p-4 animate-scale-in" data-testid="menu-dropdown">
-          <p className="text-white/70 text-sm mb-2">Привет, {user?.login}</p>
-          <button 
-            onClick={() => {
-              logout();
-              setShowMenu(false);
-            }}
-            className="text-white hover:text-red-400 transition-colors text-sm"
-            data-testid="logout-btn"
-          >
-            Выйти
-          </button>
-        </div>
-      )}
 
       {/* Main Content */}
       <main className="page-content px-4">

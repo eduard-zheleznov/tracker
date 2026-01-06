@@ -98,8 +98,8 @@ const PeriodSelector = ({
         </div>
       )}
 
-      {/* Quick period buttons */}
-      <div className="flex flex-wrap gap-2 justify-center">
+      {/* Quick period buttons - arranged like in the design (5 buttons in 2 rows) */}
+      <div className="grid grid-cols-5 gap-2">
         {periods.map((period) => (
           <button
             key={period.id}
@@ -107,7 +107,7 @@ const PeriodSelector = ({
               onPeriodChange(period.id);
               setShowCustomPeriod(false);
             }}
-            className={`period-btn ${selectedPeriod === period.id ? 'active' : ''}`}
+            className={`period-btn text-center py-2 px-1 text-xs sm:text-sm ${selectedPeriod === period.id ? 'active' : ''}`}
             data-testid={`period-btn-${period.id}`}
           >
             {period.label}
@@ -118,7 +118,7 @@ const PeriodSelector = ({
       {/* Custom period button */}
       <button
         onClick={() => setShowCustomPeriod(!showCustomPeriod)}
-        className={`w-full period-btn ${selectedPeriod === 'custom' ? 'active' : ''}`}
+        className={`w-full period-btn py-3 ${selectedPeriod === 'custom' ? 'active' : ''}`}
         data-testid="custom-period-btn"
       >
         Другой период
