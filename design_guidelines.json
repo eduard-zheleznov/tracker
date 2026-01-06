@@ -1,0 +1,153 @@
+{
+  "identity": {
+    "name": "JoyTracker",
+    "persona": "E1 - The Anti-AI Designer",
+    "tone": "Empathetic, Vibrant, Deep, Insightful",
+    "aesthetic": "Dark Luxury Zen",
+    "design_principles": [
+      "Fusion over Imitation: Mix wellness calm with fintech precision",
+      "Emotion First: Color gradients represent emotional states",
+      "Content is King: Data visualization (speedometer) is the hero",
+      "Negative Space: Breathable layouts for reflection",
+      "Contrast: Neon accents on deep purple backgrounds"
+    ]
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Outfit, sans-serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl md:text-5xl font-bold tracking-tight",
+      "h2": "text-3xl md:text-4xl font-semibold tracking-tight",
+      "h3": "text-2xl md:text-3xl font-medium",
+      "body_lg": "text-lg leading-relaxed",
+      "body_base": "text-base leading-relaxed",
+      "caption": "text-sm text-muted-foreground"
+    },
+    "imports": [
+      "@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');"
+    ]
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#8B5CF6",
+        "foreground": "#FFFFFF"
+      },
+      "background": {
+        "DEFAULT": "#130820",
+        "paper": "#1F1135",
+        "subtle": "#2D1B4E"
+      },
+      "accent": {
+        "success": "#4ADE80",
+        "warning": "#FB923C",
+        "danger": "#F87171",
+        "info": "#38BDF8"
+      },
+      "gradients": {
+        "happiness_header": "bg-gradient-to-r from-yellow-400 via-orange-500 to-green-500",
+        "speedometer_arc": "url(#speedometerGradient)",
+        "glass_surface": "bg-white/5 backdrop-blur-xl border-white/10"
+      }
+    },
+    "theme_strategy": {
+      "mode": "hybrid",
+      "rules": "Auth pages use LIGHT theme (white/gray). Main app uses DARK PURPLE theme (#130820).",
+      "auth_theme": {
+        "background": "#FFFFFF",
+        "foreground": "#0F172A",
+        "card": "#F8FAFC",
+        "border": "#E2E8F0"
+      },
+      "app_theme": {
+        "background": "#130820",
+        "foreground": "#F8FAFC",
+        "card": "#1F1135",
+        "border": "#3E2C5A"
+      }
+    }
+  },
+  "layout": {
+    "grid_system": {
+      "mobile": "grid-cols-1 gap-4 p-4",
+      "tablet": "grid-cols-2 gap-6 p-6",
+      "desktop": "grid-cols-12 gap-8 p-8 max-w-5xl mx-auto"
+    },
+    "spacing": {
+      "container_padding": "p-4 md:p-8",
+      "section_gap": "gap-6 md:gap-10",
+      "element_gap": "gap-3"
+    },
+    "radius": {
+      "default": "rounded-xl",
+      "card": "rounded-2xl",
+      "button": "rounded-full"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-white hover:bg-primary/90 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all hover:scale-105 active:scale-95",
+      "secondary": "bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/10",
+      "ghost": "hover:bg-white/5 text-muted-foreground hover:text-white"
+    },
+    "cards": {
+      "glass": "bg-[#1F1135]/80 backdrop-blur-xl border border-white/10 shadow-xl",
+      "solid": "bg-[#1F1135] border border-[#3E2C5A]"
+    },
+    "inputs": {
+      "default": "bg-black/20 border-white/10 focus:border-primary/50 focus:ring-primary/20 text-white placeholder:text-white/30"
+    },
+    "navigation": {
+      "bottom_bar": "fixed bottom-0 left-0 right-0 bg-[#130820]/90 backdrop-blur-lg border-t border-white/10 h-16 flex items-center justify-around z-50 safe-area-pb"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]",
+    "neon_glow": "shadow-[0_0_15px_rgba(139,92,246,0.5)]",
+    "gradients": {
+      "text_gradient": "bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-orange-500 to-green-500"
+    }
+  },
+  "assets": {
+    "icons": "lucide-react",
+    "images": {
+      "auth_background": "https://images.pexels.com/photos/35539496/pexels-photo-35539496.jpeg",
+      "empty_state": "https://images.pexels.com/photos/35543594/pexels-photo-35543594.jpeg",
+      "abstract_bg": "https://images.pexels.com/photos/6775241/pexels-photo-6775241.jpeg"
+    }
+  },
+  "specific_modules": {
+    "speedometer": {
+      "type": "custom_svg_or_recharts",
+      "gradient_stops": [
+        { "offset": "0%", "color": "#EF4444" },
+        { "offset": "50%", "color": "#F97316" },
+        { "offset": "100%", "color": "#22C55E" }
+      ],
+      "needle_color": "#FFFFFF",
+      "track_bg": "#3E2C5A"
+    },
+    "assessment_form": {
+      "layout": "accordion_or_stepper",
+      "checkbox_style": "data-[state=checked]:bg-green-500 data-[state=checked]:border-green-500 border-white/20"
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. THEME SWITCHING: Implement a context or hook to handle the specific requirement: Auth pages = Light Mode, App pages = Dark Mode. Do not rely on system preference alone.",
+    "2. SPEEDOMETER: Create a custom component for the Happiness Speedometer. It must accept a value (0-10) and animate the needle. Use the specified Red-Orange-Green gradient.",
+    "3. BOTTOM NAV: Implement a fixed bottom navigation bar for mobile. Ensure it has proper padding for safe areas on iOS.",
+    "4. FORMS: Use Shadcn Form + React Hook Form. Customize the Input and Checkbox components to match the Dark Purple theme (remove default white backgrounds).",
+    "5. GRADIENTS: Apply the 'Yellow-Orange-Green' gradient to the main page headings as requested.",
+    "6. DATA-TESTID: Add data-testid attributes to all interactive elements (buttons, inputs, tabs) for testing."
+  ],
+  "universal_guidelines": [
+    "Avoid generic centered layouts. Use asymmetry where possible.",
+    "Use 2-3x more spacing than typical designs.",
+    "Every interaction needs micro-animations.",
+    "Do not use 'Inter' for headings; use 'Outfit'.",
+    "Ensure text contrast meets APCA standards, especially on dark backgrounds."
+  ]
+}
