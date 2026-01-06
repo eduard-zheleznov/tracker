@@ -265,7 +265,7 @@ def get_period_dates(period_type: str, start_date: str = None, end_date: str = N
     return start, now
 
 @api_router.post("/happiness-score", response_model=HappinessScoreResponse)
-async def calculate_happiness_score(data: HappinessScoreRequest, authorization: str = ""):
+async def calculate_happiness_score(data: HappinessScoreRequest, authorization: str = Header(None)):
     user = await get_current_user(authorization)
     
     start_date, end_date = get_period_dates(
