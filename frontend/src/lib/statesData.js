@@ -2,7 +2,7 @@
 export const harmoniousGroups = [
   {
     id: 1,
-    name: "1 Блок",
+    name: "1 Группа",
     states: [
       "Выспанность",
       "Интерес; Любопытство",
@@ -13,7 +13,7 @@ export const harmoniousGroups = [
   },
   {
     id: 2,
-    name: "2 Блок",
+    name: "2 Группа",
     states: [
       "Надежда",
       "Оптимизм",
@@ -23,7 +23,7 @@ export const harmoniousGroups = [
   },
   {
     id: 3,
-    name: "3 Блок",
+    name: "3 Группа",
     states: [
       "Решительность; Готовность",
       "Смелость; Отвага; Мужество",
@@ -32,7 +32,7 @@ export const harmoniousGroups = [
   },
   {
     id: 4,
-    name: "4 Блок",
+    name: "4 Группа",
     states: [
       "Справедливость; Непредвзятость",
       "Искренность; Открытость; Правдивость; Честность"
@@ -40,7 +40,7 @@ export const harmoniousGroups = [
   },
   {
     id: 5,
-    name: "5 Блок",
+    name: "5 Группа",
     states: [
       "Значимость",
       "Самоценность; Самоуважение"
@@ -48,7 +48,7 @@ export const harmoniousGroups = [
   },
   {
     id: 6,
-    name: "6 Блок",
+    name: "6 Группа",
     states: [
       "Комфорт",
       "Легкость",
@@ -60,7 +60,7 @@ export const harmoniousGroups = [
   },
   {
     id: 7,
-    name: "7 Блок",
+    name: "7 Группа",
     states: [
       "Любовь",
       "Близость",
@@ -73,7 +73,7 @@ export const harmoniousGroups = [
   },
   {
     id: 8,
-    name: "8 Блок",
+    name: "8 Группа",
     states: [
       "Удовлетворенность",
       "Восторг; Восхищение",
@@ -84,7 +84,7 @@ export const harmoniousGroups = [
   },
   {
     id: 9,
-    name: "9 Блок",
+    name: "9 Группа",
     states: [
       "Инсайт; Озарение",
       "Страсть; Влечение",
@@ -93,7 +93,7 @@ export const harmoniousGroups = [
   },
   {
     id: 10,
-    name: "10 Блок",
+    name: "10 Группа",
     states: [
       "Самообладание; Самодисциплина; Самоконтроль",
       "Внимательность; Сосредоточенность; Собранность"
@@ -105,7 +105,7 @@ export const harmoniousGroups = [
 export const disharmoniousGroups = [
   {
     id: 1,
-    name: "1 Блок",
+    name: "1 Группа",
     states: [
       "Отвращение; Брезгливость",
       "Недовольство; Раздражение",
@@ -119,7 +119,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 2,
-    name: "2 Блок",
+    name: "2 Группа",
     states: [
       "Неуверенность; Сомнение; Неопределенность; Недоверие; Опасение; Беспокойство",
       "Запутанность; Растерянность; Я не понимаю",
@@ -129,7 +129,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 3,
-    name: "3 Блок",
+    name: "3 Группа",
     states: [
       "Скука",
       "Безразличие; Бессмысленность",
@@ -138,7 +138,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 4,
-    name: "4 Блок",
+    name: "4 Группа",
     states: [
       "Не выспанность",
       "Усталость; Сонливость; Вялость",
@@ -147,7 +147,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 5,
-    name: "5 Блок",
+    name: "5 Группа",
     states: [
       "Нелюбовь (от других людей)",
       "Меня не понимают",
@@ -159,7 +159,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 6,
-    name: "6 Блок",
+    name: "6 Группа",
     states: [
       "Стыд, вина, угрызение совести",
       "Обман (заметили за собой или в свою сторону)",
@@ -169,7 +169,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 7,
-    name: "7 Блок",
+    name: "7 Группа",
     states: [
       "Неловкость",
       "Напряженность",
@@ -179,7 +179,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 8,
-    name: "8 Блок",
+    name: "8 Группа",
     states: [
       "Уязвленность",
       "Зависимость (от людей)",
@@ -188,7 +188,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 9,
-    name: "9 Блок",
+    name: "9 Группа",
     states: [
       "Гнев; Злость; Ярость",
       "Ненависть; Месть"
@@ -196,7 +196,7 @@ export const disharmoniousGroups = [
   },
   {
     id: 10,
-    name: "10 Блок",
+    name: "10 Группа",
     states: [
       "Зависть",
       "Жажда; Голод; Холод"
