@@ -1,34 +1,215 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
+/* App specific styles */
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-header {
-    background-color: #0f0f10;
+/* Main app container */
+.app-container {
     min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* Auth page styles */
+.auth-container {
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    padding: 1rem;
+    background: #FFFFFF;
+}
+
+/* Main app dark purple background */
+.main-app-bg {
+    background: linear-gradient(180deg, #130820 0%, #1F1135 100%);
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(19, 8, 32, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    z-index: 50;
+}
+
+/* Page content with bottom nav spacing */
+.page-content {
+    padding-bottom: 5rem;
+}
+
+/* Speedometer container */
+.speedometer-container {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+/* Period selector buttons */
+.period-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.period-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.period-btn.active {
+    background: rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* State group card */
+.state-group-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Checkbox label styling */
+.state-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    cursor: pointer;
+}
+
+.state-checkbox-label:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+    margin: 0 -0.5rem;
+    padding: 0.5rem;
+}
+
+/* Selected state tag */
+.state-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    background: rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(139, 92, 246, 0.3);
     color: white;
 }
 
-.App-link {
-    color: #61dafb;
+/* Success modal */
+.success-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 100;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
+.success-modal-content {
+    background: linear-gradient(180deg, #1F1135 0%, #130820 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    max-width: 90%;
+    width: 320px;
+}
+
+/* Form input dark theme */
+.dark-input {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+.dark-input::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark-input:focus {
+    border-color: rgba(139, 92, 246, 0.5) !important;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* Textarea dark theme */
+.dark-textarea {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.dark-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.dark-textarea:focus {
+    outline: none;
+    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* Select dark theme */
+.dark-select {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+}
+
+.dark-select:focus {
+    outline: none;
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Auth form card */
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+/* Colored dots for auth */
+.auth-dots {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.auth-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+/* Mobile first responsive adjustments */
+@media (max-width: 640px) {
+    .auth-card {
+        padding: 1.5rem;
     }
-    to {
-        transform: rotate(360deg);
+    
+    .speedometer-container {
+        max-width: 280px;
     }
 }
