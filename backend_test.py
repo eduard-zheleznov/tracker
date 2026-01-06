@@ -10,7 +10,7 @@ class JoyTrackerAPITester:
         self.user_id = None
         self.tests_run = 0
         self.tests_passed = 0
-        self.test_user_login = f"test_user_{datetime.now().strftime('%H%M%S')}"
+        self.test_login = f"test_user_{datetime.now().strftime('%H%M%S')}"
         self.test_password = "TestPass123!"
         self.test_hint = "My favorite color"
 
