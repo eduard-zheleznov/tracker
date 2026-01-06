@@ -586,7 +586,17 @@ def main():
         tester.test_user_profile()
         tester.test_assessment_creation()
         tester.test_happiness_score()
+        tester.test_analysis_endpoints()
+        tester.test_strategy_endpoints()
+        tester.test_profile_endpoints()
+        tester.test_reminders_endpoints()
+        tester.test_faq_endpoints()
+        tester.test_feedback_endpoint()
+        tester.test_education_endpoints()
+        tester.test_content_endpoints()
+        tester.test_dictionary_endpoint()
         tester.test_unauthorized_access()
+        tester.test_admin_endpoints()
         
     except Exception as e:
         print(f"💥 Test suite failed with error: {str(e)}")
