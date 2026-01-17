@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 const HappinessSpeedometer = ({ score = null, hasData = false }) => {
   const [animatedScore, setAnimatedScore] = useState(0);
   
-  // Animate the needle
   useEffect(() => {
     if (score !== null && hasData) {
       const targetScore = Math.min(10, Math.max(0, score));
@@ -24,18 +23,17 @@ const HappinessSpeedometer = ({ score = null, hasData = false }) => {
     }
   }, [score, hasData]);
 
-  // Calculate needle rotation (0 = -135deg, 10 = 135deg)
+  // Calculate needle rotation - 0 at left (-135°), 10 at right (135°)
   const needleRotation = hasData 
     ? -135 + (animatedScore / 10) * 270 
     : -135;
 
-  // SVG parameters - corrected geometry to match design
   const centerX = 150;
-  const centerY = 140;
-  const radius = 110;
-  const strokeWidth = 22;
+  const centerY = 130;
+  const radius = 100;
+  const strokeWidth = 18;
 
-  // Create arc path for semi-circle (from -135 to 135 degrees)
+  // Create arc path
   const createArc = (startAngle, endAngle, r) => {
     const startRad = (startAngle * Math.PI) / 180;
     const endRad = (endAngle * Math.PI) / 180;
@@ -50,20 +48,47 @@ const HappinessSpeedometer = ({ score = null, hasData = false }) => {
     return `M ${x1} ${y1} A ${r} ${r} 0 ${largeArcFlag} 1 ${x2} ${y2}`;
   };
 
-  // Generate tick marks
-  const ticks = [];
-  for (let i = 0; i <= 10; i++) {
+  // Generate tick marks at 0, 5, 10
+  const majorTicks = [0, 5, 10].map(i => {
     const angle = -135 + (i / 10) * 270;
     const rad = (angle * Math.PI) / 180;
-    const innerR = radius + strokeWidth / 2 + 5;
-    const outerR = radius + strokeWidth / 2 + 12;
+    const innerR = radius + strokeWidth / 2 + 8;
+    const outerR = radius + strokeWidth / 2 + 18;
     
     const x1 = centerX + innerR * Math.cos(rad);
     const y1 = centerY + innerR * Math.sin(rad);
     const x2 = centerX + outerR * Math.cos(rad);
     const y2 = centerY + outerR * Math.sin(rad);
     
-    ticks.push(
+    return (
+      <line
+        key={i}
+        x1={x1}
+        y1={y1}
+        x2={x2}
+        y2={y2}
+        stroke="rgba(255,255,255,0.5)"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+    );
+  });
+
+  // Minor ticks
+  const minorTicks = [];
+  for (let i = 1; i <= 9; i++) {
+    if (i === 5) continue;
+    const angle = -135 + (i / 10) * 270;
+    const rad = (angle * Math.PI) / 180;
+    const innerR = radius + strokeWidth / 2 + 8;
+    const outerR = radius + strokeWidth / 2 + 13;
+    
+    const x1 = centerX + innerR * Math.cos(rad);
+    const y1 = centerY + innerR * Math.sin(rad);
+    const x2 = centerX + outerR * Math.cos(rad);
+    const y2 = centerY + outerR * Math.sin(rad);
+    
+    minorTicks.push(
       <line
         key={i}
         x1={x1}
@@ -77,31 +102,40 @@ const HappinessSpeedometer = ({ score = null, hasData = false }) => {
     );
   }
 
+  // Calculate label positions
+  const getLabelPosition = (value) => {
+    const angle = -135 + (value / 10) * 270;
+    const rad = (angle * Math.PI) / 180;
+    const labelR = radius + strokeWidth / 2 + 30;
+    return {
+      x: centerX + labelR * Math.cos(rad),
+      y: centerY + labelR * Math.sin(rad)
+    };
+  };
+
+  const pos0 = getLabelPosition(0);
+  const pos10 = getLabelPosition(10);
+
   return (
-    <div className="speedometer-container" data-testid="happiness-speedometer">
-      <svg viewBox="0 0 300 200" className="w-full max-w-[320px] mx-auto">
+    <div className="flex justify-center" data-testid="happiness-speedometer">
+      <svg viewBox="0 0 300 190" className="w-full max-w-[300px]">
         <defs>
-          {/* Gradient for the arc - matching design colors */}
-          <linearGradient id="speedometerGradient" gradientUnits="userSpaceOnUse" x1="40" y1="140" x2="260" y2="140">
-            <stop offset="0%" stopColor="#DC2626" />
-            <stop offset="25%" stopColor="#F97316" />
+          {/* Gradient for the arc - red to yellow to green */}
+          <linearGradient id="speedometerGradient" gradientUnits="userSpaceOnUse" x1="50" y1="130" x2="250" y2="130">
+            <stop offset="0%" stopColor="#EF4444" />
+            <stop offset="30%" stopColor="#F97316" />
             <stop offset="50%" stopColor="#FACC15" />
-            <stop offset="75%" stopColor="#84CC16" />
+            <stop offset="70%" stopColor="#84CC16" />
             <stop offset="100%" stopColor="#22C55E" />
           </linearGradient>
           
           {/* Glow filter */}
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <filter id="arcGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
-          </filter>
-
-          {/* Drop shadow for needle */}
-          <filter id="needleShadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.5"/>
           </filter>
         </defs>
 
@@ -109,7 +143,7 @@ const HappinessSpeedometer = ({ score = null, hasData = false }) => {
         <path
           d={createArc(-135, 135, radius)}
           fill="none"
-          stroke="rgba(62, 44, 90, 0.6)"
+          stroke="rgba(80, 50, 120, 0.4)"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
         />
@@ -121,30 +155,35 @@ const HappinessSpeedometer = ({ score = null, hasData = false }) => {
           stroke="url(#speedometerGradient)"
           strokeWidth={strokeWidth}
           strokeLinecap="round"
-          filter="url(#glow)"
+          filter="url(#arcGlow)"
         />
 
         {/* Tick marks */}
-        {ticks}
+        {majorTicks}
+        {minorTicks}
 
         {/* 0 label */}
         <text
-          x="32"
-          y="175"
-          fill="rgba(255,255,255,0.6)"
-          fontSize="14"
-          fontFamily="Inter, sans-serif"
+          x={pos0.x}
+          y={pos0.y + 5}
+          textAnchor="middle"
+          fill="rgba(255,255,255,0.7)"
+          fontSize="16"
+          fontWeight="500"
+          fontFamily="Outfit, sans-serif"
         >
           0
         </text>
 
         {/* 10 label */}
         <text
-          x="258"
-          y="175"
-          fill="rgba(255,255,255,0.6)"
-          fontSize="14"
-          fontFamily="Inter, sans-serif"
+          x={pos10.x}
+          y={pos10.y + 5}
+          textAnchor="middle"
+          fill="rgba(255,255,255,0.7)"
+          fontSize="16"
+          fontWeight="500"
+          fontFamily="Outfit, sans-serif"
         >
           10
         </text>
@@ -153,34 +192,39 @@ const HappinessSpeedometer = ({ score = null, hasData = false }) => {
         <g 
           transform={`rotate(${needleRotation}, ${centerX}, ${centerY})`}
           style={{ transition: 'transform 0.6s ease-out' }}
-          filter="url(#needleShadow)"
         >
-          {/* Needle body - thin red line like in design */}
+          {/* Needle line */}
           <line
-            x1={centerX - 15}
+            x1={centerX - 10}
             y1={centerY}
-            x2={centerX + radius - 30}
+            x2={centerX + radius - 25}
             y2={centerY}
-            stroke="#EF4444"
+            stroke="#FFFFFF"
             strokeWidth="3"
             strokeLinecap="round"
           />
-          {/* Needle center cap */}
-          <circle
-            cx={centerX}
-            cy={centerY}
-            r="12"
-            fill="#1F1135"
-            stroke="rgba(255,255,255,0.3)"
-            strokeWidth="2"
-          />
-          <circle
-            cx={centerX}
-            cy={centerY}
-            r="6"
-            fill="#3E2C5A"
+          {/* Needle tip */}
+          <polygon
+            points={`${centerX + radius - 25},${centerY - 6} ${centerX + radius - 10},${centerY} ${centerX + radius - 25},${centerY + 6}`}
+            fill="#FFFFFF"
           />
         </g>
+
+        {/* Center circle */}
+        <circle
+          cx={centerX}
+          cy={centerY}
+          r="14"
+          fill="rgba(45, 25, 70, 0.9)"
+          stroke="rgba(255,255,255,0.3)"
+          strokeWidth="2"
+        />
+        <circle
+          cx={centerX}
+          cy={centerY}
+          r="6"
+          fill="rgba(139, 92, 246, 0.8)"
+        />
 
         {/* Score display */}
         <text
@@ -188,7 +232,7 @@ const HappinessSpeedometer = ({ score = null, hasData = false }) => {
           y={centerY + 55}
           textAnchor="middle"
           fill="white"
-          fontSize="42"
+          fontSize="38"
           fontWeight="bold"
           fontFamily="Outfit, sans-serif"
           data-testid="happiness-score-value"

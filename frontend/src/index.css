@@ -43,26 +43,26 @@ code {
     --radius: 0.75rem;
 }
 
-/* Dark Purple theme (for main app) */
+/* Dark Purple theme (for main app) - LIGHTER background */
 .dark-purple {
-    --background: 276 67% 5%;
+    --background: 270 50% 12%;
     --foreground: 210 40% 98%;
-    --card: 276 50% 10%;
+    --card: 270 45% 15%;
     --card-foreground: 210 40% 98%;
-    --popover: 276 50% 10%;
+    --popover: 270 45% 15%;
     --popover-foreground: 210 40% 98%;
     --primary: 262 83% 58%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 276 40% 18%;
+    --secondary: 270 35% 22%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 276 40% 18%;
+    --muted: 270 35% 22%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 276 40% 18%;
+    --accent: 270 35% 22%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 276 30% 20%;
-    --input: 276 30% 20%;
+    --border: 270 25% 25%;
+    --input: 270 25% 25%;
     --ring: 262 83% 58%;
 }
 
@@ -138,9 +138,9 @@ code {
     animation: slide-in-left 0.3s ease-out forwards;
 }
 
-/* Glass morphism */
+/* Glass morphism - lighter */
 .glass {
-    background: rgba(31, 17, 53, 0.8);
+    background: rgba(55, 35, 85, 0.6);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -165,4 +165,35 @@ code {
     [data-debug-wrapper="true"] {
         display: contents !important;
     }
+}
+
+/* Fixed header */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: linear-gradient(180deg, rgba(45, 25, 70, 0.98) 0%, rgba(45, 25, 70, 0.95) 100%);
+    backdrop-filter: blur(10px);
+}
+
+/* Bottom navigation - always fixed */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(35, 20, 55, 0.98) 0%, rgba(25, 15, 40, 1) 100%);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(139, 92, 246, 0.3);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    z-index: 50;
+}
+
+/* Content padding for fixed header and bottom nav */
+.page-content-fixed {
+    padding-top: 70px;
+    padding-bottom: 90px;
+    min-height: 100vh;
 }
